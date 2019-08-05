@@ -1,0 +1,38 @@
+{% extends 'Shop/base.html' %}
+{% load static %}
+{% block title %}Страница раздела{% endblock %}
+{% block content %}
+  <div class="container">
+    <!-- Example row of columns -->
+
+    <h1>{{ section }}</h1>
+
+    <div class="row">
+
+        {% for item in section.articles.all %}
+          <div class="col-md-4">
+            <h2>{{ item.title }}</h2>
+
+            <a href="{% url 'item' %}?id={{ item.id }}">
+
+              <img src="{{ MEDIA_URL }}{{ item.image.url }}" width="180">
+
+            </a>
+
+            {% if user.is_authenticated %}
+                <form method="post">
+                {% csrf_token %}
+                  <input type="hidden" name="user-id" value="{{ user.id }}">
+                  <input type="hidden" name="item-id" value="{{ item.id }}">
+                  <input type="submit" class="btn btn-secondary" value="Добавить в корзину »">
+                </form>
+            {% else %}
+                <h6>Войдите, чтобы купить</h6>
+            {% endif %}
+          </div>
+        {% endfor %}
+
+    </div> <!-- /container -->
+
+  </div>
+{% endblock %}
