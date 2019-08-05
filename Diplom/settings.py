@@ -133,5 +133,5 @@ LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
 
 AUTHENTICATION_BACKENDS = (
-    'Shop.auth_backend.EmailAuthenticationBackend',
+    'Shop.auth_backend.EmailAuthenticationBackend', 'django.contrib.auth.backends.ModelBackend'
 )
