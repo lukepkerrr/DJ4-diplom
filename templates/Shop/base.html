@@ -42,11 +42,11 @@
                     </div>
                   </li>
               {% endfor %}
-          {% else %}
-              <li class="nav-item">
-                <a class="nav-link" href="{% url 'empty_section' %}">
-                  {{ type.title }}</a>
-              </li>
+{#          {% else %}#}
+{#              <li class="nav-item">#}
+{#                <a class="nav-link" href="{% url 'empty_section' %}">#}
+{#                  {{ type.title }}</a>#}
+{#              </li>#}
           {% endif %}
       {% endfor %}
       

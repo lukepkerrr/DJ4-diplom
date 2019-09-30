@@ -8,7 +8,7 @@ class Item(models.Model):
     description = models.TextField(verbose_name='Описание')
     image = models.ImageField(upload_to='images/', null=True, blank=True, verbose_name='Изображение')
     published_at = models.DateField(verbose_name='Дата публикации')
-    users = models.ManyToManyField(User, through='Item_in_cart', verbose_name='Заказавшие', related_name='items')
+    users = models.ManyToManyField(User, through='ItemInCart', verbose_name='Заказавшие', related_name='items')
 
     class Meta:
         verbose_name = 'Товар'
@@ -44,7 +44,7 @@ class Section(models.Model):
         return self.title
 
 
-class Item_in_cart(models.Model):
+class ItemInCart(models.Model):
 
     item = models.ForeignKey(Item, verbose_name='Товар', on_delete=models.CASCADE)
     user = models.ForeignKey(User, verbose_name='Пользователь', on_delete=models.CASCADE)

@@ -1,11 +1,11 @@
 from django.contrib import admin
 
-from .models import Item, Type, Section, Item_in_cart, Jumbotron, Comment
+from .models import Item, Type, Section, ItemInCart, Jumbotron, Comment
 
 from django.contrib.auth.models import User
 
 class ItemInline(admin.TabularInline):
-    model = Item_in_cart
+    model = ItemInCart
     extra = 1
 
 
@@ -33,7 +33,7 @@ class UserAdmin(admin.ModelAdmin):
     inlines = (ItemInline, )
 
 
-class Item_in_cartAdmin(admin.ModelAdmin):
+class ItemInCartAdmin(admin.ModelAdmin):
     pass
 
 
@@ -42,6 +42,6 @@ admin.site.register(Type, TypeAdmin)
 admin.site.register(Section, SectionAdmin)
 admin.site.register(Jumbotron, JumbotronAdmin)
 admin.site.register(Comment, CommentAdmin)
-admin.site.register(Item_in_cart, Item_in_cartAdmin)
+admin.site.register(ItemInCart, ItemInCartAdmin)
 admin.site.unregister(User)
 admin.site.register(User, UserAdmin)
