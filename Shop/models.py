@@ -71,6 +71,7 @@ class Jumbotron(models.Model):
     def __str__(self):
         return '{} {} {}'.format(self.first_field, self.second_field, self.section)
 
+
 class Comment(models.Model):
 
     name = models.CharField(max_length=256, verbose_name='Имя')
@@ -84,3 +85,17 @@ class Comment(models.Model):
 
     def __str__(self):
         return '{} {} {}'.format(self.name, self.score, self.item)
+
+
+class PurchasedItem(models.Model):
+
+    item = models.ForeignKey(Item, verbose_name='Товар', on_delete=models.DO_NOTHING)
+    user = models.ForeignKey(User, verbose_name='Пользователь', on_delete=models.CASCADE)
+    amount = models.IntegerField(verbose_name='Количество')
+
+    class Meta:
+        verbose_name = 'Заказ'
+        verbose_name_plural = 'Заказы'
+
+    def __str__(self):
+        return '{} {} {}'.format(self.item, self.user, self.amount)

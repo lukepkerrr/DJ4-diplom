@@ -27,10 +27,16 @@
 
       <form method="post" class="card p-2">
           {% csrf_token %}
-          <input type="submit" class="btn btn-secondary" value="Заказать">
+          <input type="submit" class="btn btn-secondary" id="buy-btn" value="Заказать">
       </form>
     </div>
   </div>
 
 </div>
+<script>
+    let button = document.querySelector('#buy-btn');
+    button.onclick = function () {
+        alert('Заказ совершен')
+    }
+</script>
 {% endblock %}

@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404
-from .models import Item, Section, Jumbotron, ItemInCart
+from .models import Item, Section, Jumbotron, ItemInCart, PurchasedItem
 from django.contrib.auth.models import User
 from django.core.exceptions import ObjectDoesNotExist
 
@@ -24,8 +24,15 @@ def main_page(request):
 
 def cart(request):
     if request.method == 'POST':
-        print('Заказ сделан')
-        ItemInCart.objects.filter(user=request.user).delete()
+        items_for_purchase = ItemInCart.objects.filter(user=request.user)
+        for purchasing_item in items_for_purchase:
+            new_item = PurchasedItem(
+                item=purchasing_item.item,
+                user=purchasing_item.user,
+                amount=purchasing_item.amount
+            )
+            new_item.save()
+        items_for_purchase.delete()
     items_in_cart = ItemInCart.objects.filter(user=request.user)
     amount_of_items = items_in_cart.count()
     template = 'Shop/cart.html'
